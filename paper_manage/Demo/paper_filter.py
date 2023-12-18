@@ -11,6 +11,6 @@ def demo():
     paper_filter.loadWanfangPapersFolder(wanfang_data_folder_path, ignore_same)
     paper_filter.loadZhiwangPapersFolder(zhiwang_data_folder_path, ignore_same)
 
-    papers = paper_filter.getPapersBySchool(valid_schools)
-    print(len(papers))
+    paper_filter.filterPapersBySchool(valid_schools)
+    print(len(paper_filter.filter_papers))
     return True
