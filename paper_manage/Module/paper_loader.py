@@ -86,14 +86,3 @@ class PaperLoader(object):
 
             self.loadZhiwangPapers(zhiwang_data_file_path, ignore_same)
         return True
-
-    def getPapersBySchool(self, valid_schools: list) -> list:
-        paper_list = []
-
-        for paper in self.paper_list:
-            if paper.school not in valid_schools:
-                continue
-
-            paper_list.append(paper.copy())
-
-        return paper_list
