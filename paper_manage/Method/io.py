@@ -1,4 +1,2 @@
-from paper_manage.Data.paper import Paper
-
-def loadWanfangData(data_list):
-    return Paper()
+from paper_manage.Method.io_wanfang import loadWanfangFile
+from paper_manage.Method.io_zhiwang import loadZhiwangFile
