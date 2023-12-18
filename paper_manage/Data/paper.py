@@ -54,6 +54,12 @@ class Paper(object):
     def copy(self):
         return deepcopy(self)
 
+    def getTeachersStr(self) -> str:
+        teachers_str = self.teachers[0]
+        for i in range(1, len(self.teachers)):
+            teachers_str += ', ' + self.teachers[i]
+        return teachers_str
+
     def outputInfo(self, info_level=0) -> bool:
         start = '\t' * info_level
         print(start + '[Paper]')

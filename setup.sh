@@ -1,1 +1,1 @@
-pip install xlrd xlwt tqdm
+pip install xlrd xlwt tqdm pypinyin

@@ -2,6 +2,7 @@ import os
 
 from paper_manage.Data.paper import Paper
 from paper_manage.Method.io import loadWanfangFile, loadZhiwangFile
+from paper_manage.Method.sort import toPinyin
 
 class PaperLoader(object):
     def __init__(self) -> None:
@@ -14,8 +15,13 @@ class PaperLoader(object):
 
     def addPaper(self, paper: Paper, ignore_same: bool=True) -> bool:
         for i in range(len(self.paper_list)):
-            if self.paper_list[i].title == paper.title:
+            if self.paper_list[i].author == paper.author:
                 if ignore_same:
+                    d1 = toPinyin(self.paper_list[i].degree)
+                    d2 = toPinyin(paper.degree)
+                    if d1 > d2:
+                        self.paper_list.pop(i)
+                        self.paper_list.append(paper.copy())
                     return True
 
                 print('[WARN][PaperLoader::addPaper]')
@@ -26,7 +32,7 @@ class PaperLoader(object):
                 self.paper_list[i].outputInfo(1)
                 return False
 
-        self.paper_list.append(paper)
+        self.paper_list.append(paper.copy())
         return True
 
     def loadWanfangPapers(self, wanfang_data_file_path: str, ignore_same: bool=True) -> bool:

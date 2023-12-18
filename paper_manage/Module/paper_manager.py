@@ -1,16 +1,18 @@
 import os
 import xlwt
 
+from paper_manage.Module.paper_loader import PaperLoader
 from paper_manage.Method.path import createFileFolder, removeFile
+from paper_manage.Method.filter import filterPapersByDegree, filterPapersBySchool
+from paper_manage.Method.sort import sortPaper
+from paper_manage.Method.io import saveToSheet
 
-from paper_manage.Module.paper_filter import PaperFilter
-
-class PaperManager(PaperFilter):
+class PaperManager(PaperLoader):
     def __init__(self) -> None:
         super().__init__()
         return
 
-    def toExcel(self, save_excel_file_path: str, overwrite: bool=False) -> bool:
+    def toExcel(self, save_excel_file_path: str, valid_schools: list, overwrite: bool=False) -> bool:
         if os.path.exists(save_excel_file_path):
             if overwrite:
                 removeFile(save_excel_file_path)
@@ -23,30 +25,18 @@ class PaperManager(PaperFilter):
         createFileFolder(save_excel_file_path)
 
         workbook = xlwt.Workbook(encoding='utf-8')
-        sheet = workbook.add_sheet('Papers')
+        sheet1 = workbook.add_sheet('Papers1')
+        sheet2 = workbook.add_sheet('Papers2')
 
-        papers = self.paper_list
-        if len(self.filter_papers) > 0:
-            papers = self.filter_papers
+        filter_papers = filterPapersBySchool(self.paper_list, valid_schools)
+        papers1 = filterPapersByDegree(filter_papers, ['硕士'])
+        papers2 = filterPapersByDegree(filter_papers, ['博士'])
 
-        sheet.write(0, 0, 'Author')
-        sheet.write(0, 1, 'Title')
-        sheet.write(0, 2, 'School')
-        sheet.write(0, 3, 'Section')
-        sheet.write(0, 4, 'Year')
-        sheet.write(0, 5, 'Teachers')
-        sheet.write(0, 6, 'Degree')
-        sheet.write(0, 7, 'PubTime')
+        sortPaper(papers1)
+        sortPaper(papers2)
 
-        for i, paper in enumerate(papers):
-            sheet.write(i + 1, 0, paper.author)
-            sheet.write(i + 1, 1, paper.title)
-            sheet.write(i + 1, 2, paper.school)
-            sheet.write(i + 1, 3, paper.section)
-            sheet.write(i + 1, 4, paper.year)
-            sheet.write(i + 1, 5, paper.teachers)
-            sheet.write(i + 1, 6, paper.degree)
-            sheet.write(i + 1, 7, paper.pub_time)
+        saveToSheet(sheet1, papers1)
+        saveToSheet(sheet2, papers2)
 
         workbook.save(save_excel_file_path)
         return True
