@@ -10,7 +10,8 @@ class Paper(object):
                  year: Union[str, None]=None,
                  teachers: list=[],
                  degree: Union[str, None]=None,
-                 pub_time: Union[str, None]=None) -> None:
+                 pub_time: Union[str, None]=None,
+                 full_info: Union[str, None]=None) -> None:
         self.title = title
         self.author = author
         self.school = school
@@ -19,6 +20,7 @@ class Paper(object):
         self.teachers = teachers
         self.degree = degree
         self.pub_time = pub_time
+        self.full_info = full_info
         return
 
     def reset(self) -> bool:
@@ -30,6 +32,7 @@ class Paper(object):
         self.teachers = []
         self.degree = None
         self.pub_time = None
+        self.full_info = None
         return True
 
     def isValid(self) -> bool:
@@ -48,6 +51,8 @@ class Paper(object):
         if self.degree is None:
             return False
         if self.pub_time is None:
+            return False
+        if self.full_info is None:
             return False
         return True
 
@@ -71,4 +76,5 @@ class Paper(object):
         print(start + '\t teachers:', self.teachers)
         print(start + '\t degree:', self.degree)
         print(start + '\t pub_time:', self.pub_time)
+        print(start + '\t full_info:', self.full_info)
         return True

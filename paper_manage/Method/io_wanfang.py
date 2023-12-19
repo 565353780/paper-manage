@@ -15,11 +15,13 @@ def loadWanfangFile(wanfang_file_path):
     paper_list = []
 
     paper = Paper()
+    paper.full_info = 'Unknown'
 
     for line in lines:
         if paper.isValid():
             paper_list.append(paper.copy())
             paper.reset()
+            paper.full_info = 'Unknown'
             continue
 
         if '{Title}' in line:
