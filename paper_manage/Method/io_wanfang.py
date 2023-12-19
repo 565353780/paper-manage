@@ -15,12 +15,14 @@ def loadWanfangFile(wanfang_file_path):
     paper_list = []
 
     paper = Paper()
+    paper.pub_location = 'Wanfang'
     paper.full_info = 'Unknown'
 
     for line in lines:
         if paper.isValid():
             paper_list.append(paper.copy())
             paper.reset()
+            paper.pub_location = 'Wanfang'
             paper.full_info = 'Unknown'
             continue
 

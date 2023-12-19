@@ -16,6 +16,7 @@ def loadZhiwangFile(zhiwang_file_path):
 
     paper = Paper()
     paper.section = 'Unknown'
+    paper.pub_location = 'Zhiwang'
     paper.full_info = 'Unknown'
 
     for line in lines:
@@ -23,6 +24,7 @@ def loadZhiwangFile(zhiwang_file_path):
             paper_list.append(paper.copy())
             paper.reset()
             paper.section = 'Unknown'
+            paper.pub_location = 'Zhiwang'
             paper.full_info = 'Unknown'
             continue
 

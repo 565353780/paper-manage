@@ -1,6 +1,5 @@
 import os
 
-from paper_manage.Config.filter import MODES
 from paper_manage.Data.paper import Paper
 from paper_manage.Method.io import loadWanfangFile, loadZhiwangFile, loadACMFile
 from paper_manage.Method.sort import toPinyin

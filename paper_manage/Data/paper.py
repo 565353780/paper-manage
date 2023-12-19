@@ -11,6 +11,7 @@ class Paper(object):
                  teachers: list=[],
                  degree: Union[str, None]=None,
                  pub_time: Union[str, None]=None,
+                 pub_location: Union[str, None]=None,
                  full_info: Union[str, None]=None) -> None:
         self.title = title
         self.author = author
@@ -20,6 +21,7 @@ class Paper(object):
         self.teachers = teachers
         self.degree = degree
         self.pub_time = pub_time
+        self.pub_location = pub_location
         self.full_info = full_info
         return
 
@@ -32,6 +34,7 @@ class Paper(object):
         self.teachers = []
         self.degree = None
         self.pub_time = None
+        self.pub_location = None
         self.full_info = None
         return True
 
@@ -51,6 +54,8 @@ class Paper(object):
         if self.degree is None:
             return False
         if self.pub_time is None:
+            return False
+        if self.pub_location is None:
             return False
         if self.full_info is None:
             return False
@@ -76,5 +81,6 @@ class Paper(object):
         print(start + '\t teachers:', self.teachers)
         print(start + '\t degree:', self.degree)
         print(start + '\t pub_time:', self.pub_time)
+        print(start + '\t pub_location:', self.pub_location)
         print(start + '\t full_info:', self.full_info)
         return True
